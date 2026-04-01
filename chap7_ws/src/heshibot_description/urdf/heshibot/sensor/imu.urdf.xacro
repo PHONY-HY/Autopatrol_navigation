@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/common_inertia.xacro"/>
+
+    <xacro:macro name="imu_xacro" params=" xyz rpy">
+        <!-- 机器人的IMU部件，惯性测量传感器 -->
+        <link name="imu_link">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="0.02 0.02 0.02"/>
+                </geometry>
+                <material name="black">
+                    <color rgba="0.0 0.0 0.0 0.5"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="0.02 0.02 0.02"/>
+                </geometry>
+                <material name="black">
+                    <color rgba="0.0 0.0 0.0 0.5"/>
+                </material>
+            </collision>
+
+            <xacro:box_inertia m="0.05" w="0.02" h="0.02" d="0.02"/>
+        </link>
+    
+        <!-- 机器人关节定义，组合部件 -->
+        <joint name="imu_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="imu_link"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <!-- <axis xyz="0.0 0.0 0.0"/>-->
+            <!-- <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>  -->
+        </joint>
+
+        <gazebo reference="imu_link">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+    </xacro:macro>
+</robot>

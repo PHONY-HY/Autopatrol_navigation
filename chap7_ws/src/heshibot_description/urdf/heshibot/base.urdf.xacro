@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/common_inertia.xacro"/>
+
+    <xacro:macro name="base_xacro" params="radius length">
+        <link name="base_footprint"/>
+
+        <!-- 机器人身体部分 -->
+        <link name="base_link">
+        <!-- 部件外观描述 -->
+            <visual>
+                <!-- 沿着自己几何中心的偏移和旋转量 -->
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- 几何形状定义 -->
+                <geometry>
+                <!-- 圆柱体定义半径，高度 -->
+                <cylinder radius="${radius}" length="${length}"/>
+                </geometry>
+                <!-- 材质颜色定义 -->
+                <material name="white">
+                    <color rgba="1.0 1.0 1.0 0.5"/> 
+                </material>
+            </visual>
+            <collision>
+                <!-- 沿着自己几何中心的偏移和旋转量 -->
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- 几何形状定义 -->
+                <geometry>
+                <!-- 圆柱体定义半径，高度 -->
+                <cylinder radius="${radius}" length="${length}"/>
+                </geometry>
+                <!-- 材质颜色定义 -->
+                <material name="white">
+                    <color rgba="1.0 1.0 1.0 0.5"/> 
+                </material>
+            </collision>
+
+            <xacro:cylinder_inertia m="1.0" r="${radius}" h="${length}"/>
+        </link>
+
+        <joint name="base_footprint_joint" type="fixed">
+            <origin xyz="0.0 0.0 ${length/2.0+0.032-0.01}" rpy="0.0 0.0 0.0"/>
+            <parent link="base_footprint"/>
+            <child link="base_link"/>
+        </joint>
+
+        <gazebo reference="base_link">
+            <material>Gazebo/Green</material>
+        </gazebo>
+    </xacro:macro>
+</robot>

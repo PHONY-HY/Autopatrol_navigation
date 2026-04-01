@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="heshibot">
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/base.urdf.xacro" />
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/sensor/imu.urdf.xacro" />
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/sensor/camera.urdf.xacro" />
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/sensor/laser.urdf.xacro" />
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/actuator/wheel.urdf.xacro" />
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/actuator/caster.urdf.xacro" />
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/plugins/gazebo_control_plugin.xacro"/>
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/plugins/gazebo_sensor_plugin.xacro"/>
+    <xacro:include filename="$(find heshibot_description)/urdf/heshibot/heshibot.ros2_control.xacro"/>
+
+
+
+
+
+    <xacro:base_xacro radius="0.1" length="0.12"/>
+    <xacro:imu_xacro xyz="0.0 0.0 0.02" rpy="0.0 0.0 0.0"/>
+    <xacro:camera_xacro xyz="0.1 0.0 0.075" rpy="0.0 0.0 0.0"/>
+    <xacro:laser_xacro xyz="0.0 0.0 0.10" rpy="0.0 0.0 0.0"/>
+    <xacro:wheel_xacro wheel_name="left_wheel" xyz="0.0 0.10 -0.06" rpy="0.0 0.0 0.0"/>
+    <xacro:wheel_xacro wheel_name="right_wheel" xyz="0.0 -0.10 -0.06" rpy="0.0 0.0 0.0"/>
+    <xacro:caster_xacro caster_name="front_caster" xyz="0.08 0.0 -0.076" rpy="0.0 0.0 0.0"/>
+    <xacro:caster_xacro caster_name="back_caster" xyz="-0.08 0.0 -0.076" rpy="0.0 0.0 0.0"/>
+    <!-- <xacro:gazebo_control_plugin/> -->
+    <xacro:gazebo_sensor_plugin/>
+    <xacro:heshibot_ros2_control/>
+
+</robot>
